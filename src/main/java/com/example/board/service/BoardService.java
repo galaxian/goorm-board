@@ -21,4 +21,9 @@ public class BoardService {
 		Board saveBoard = boardRepository.save(board);
 		return saveBoard.getId();
 	}
+
+	@Transactional
+	public void deleteBoard(Long boardId) {
+		boardRepository.deleteById(boardId);
+	}
 }

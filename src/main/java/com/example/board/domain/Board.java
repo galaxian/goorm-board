@@ -2,6 +2,10 @@ package com.example.board.domain;
 
 import java.util.List;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.annotations.Where;
+
 import com.example.board.util.BaseEntity;
 
 import jakarta.persistence.Column;
@@ -11,10 +15,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "board")
+@SQLDelete(sql = "update board set is_delete = true where board_id = ?")
+@SQLRestriction("is_delete is false")
 @Entity
 public class Board extends BaseEntity {
 
@@ -26,6 +35,8 @@ public class Board extends BaseEntity {
 	private String title;
 
 	private String content;
+
+	private boolean isDelete = false;
 
 	@OneToMany(mappedBy = "board")
 	private List<Comment> comments;

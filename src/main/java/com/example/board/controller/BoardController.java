@@ -1,5 +1,7 @@
 package com.example.board.controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +21,12 @@ public class BoardController {
 	@PostMapping("/api/boards")
 	public ApiResponse<Long> createBoard(@RequestBody CreateBoardReqDto reqDto) {
 		Long boardId = boardService.createBoard(reqDto);
-		return makeApiResponse(boardId);
+		return ApiResponse.successCreateResponse(boardId);
 	}
 
-	private <T> ApiResponse<T> makeApiResponse(T responseDto) {
-		return ApiResponse.successResponse(responseDto);
+	@DeleteMapping("/api/boards/{boardId}")
+	public ApiResponse<Void> deleteBoard(@PathVariable("boardId") Long boardId) {
+		boardService.deleteBoard(boardId);
+		return ApiResponse.successDeleteResponse();
 	}
 }

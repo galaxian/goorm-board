@@ -9,8 +9,12 @@ public class ApiResponse<T> {
 	private T data;
 	private String message;
 
-	public static <T> ApiResponse<T> successResponse(T data) {
+	public static <T> ApiResponse<T> successCreateResponse(T data) {
 		return new ApiResponse<>(Status.CREATE, data, null);
+	}
+
+	public static ApiResponse<Void> successDeleteResponse() {
+		return new ApiResponse<>(Status.OK, null, null);
 	}
 
 	private ApiResponse(Status status, T data, String message) {

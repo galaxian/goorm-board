@@ -4,7 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum Status {
-	CREATE(201);
+	CREATE(201),
+	OK(200);
 
 	private final int statusCode;
 
