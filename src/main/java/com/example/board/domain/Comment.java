@@ -9,9 +9,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "comment")
 @Entity
 public class Comment {
@@ -26,4 +29,9 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "board_id")
 	private Board board;
+
+	public Comment(String content, Board board) {
+		this.content = content;
+		this.board = board;
+	}
 }
