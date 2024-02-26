@@ -47,7 +47,7 @@ public class BoardService {
 	public List<FindAllBoardReqDto> findAllBoard() {
 		List<Board> boardList = boardRepository.findAll();
 		return boardList.stream()
-			.map(b -> new FindAllBoardReqDto(b.getId(), b.getTitle(), b.getContent()))
+			.map(b -> new FindAllBoardReqDto(b.getId(), b.getTitle()))
 			.collect(Collectors.toList());
 	}
 }
