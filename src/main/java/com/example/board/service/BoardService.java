@@ -3,6 +3,10 @@ package com.example.board.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,8 +50,9 @@ public class BoardService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<FindAllBoardResDto> findAllBoard() {
-		List<Board> boardList = boardRepository.findAll();
+	public List<FindAllBoardResDto> findAllBoard(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
+		Page<Board> boardList = boardRepository.findAll(pageable);
 		return boardList.stream()
 			.map(b -> new FindAllBoardResDto(b.getId(), b.getTitle()))
 			.collect(Collectors.toList());
@@ -55,6 +60,7 @@ public class BoardService {
 
 	@Transactional(readOnly = true)
 	public FindBoardResDto findBoard(Long boardId) {
+
 		Board findBoard = boardRepository.findById(boardId).orElseThrow(
 			() -> new IllegalArgumentException("게시글이 존재하지 않습니다.")
 		);

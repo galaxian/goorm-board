@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.board.dto.CreateBoardReqDto;
@@ -44,8 +45,10 @@ public class BoardController {
 	}
 
 	@GetMapping("/api/boards")
-	public ApiResponse<List<FindAllBoardResDto>> findAllBoard() {
-		List<FindAllBoardResDto> data = boardService.findAllBoard();
+	public ApiResponse<List<FindAllBoardResDto>> findAllBoard(
+		@RequestParam(required = false, defaultValue = "0", value = "page") int page,
+		@RequestParam(required = false, defaultValue = "2", value = "size") int size) {
+		List<FindAllBoardResDto> data = boardService.findAllBoard(page, size);
 		return ApiResponse.successResponse(data);
 	}
 
