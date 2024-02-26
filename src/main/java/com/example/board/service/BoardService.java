@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.board.domain.Board;
 import com.example.board.dto.CreateBoardReqDto;
+import com.example.board.dto.UpdateBoardReqDto;
 import com.example.board.repository.BoardRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,16 @@ public class BoardService {
 	@Transactional
 	public void deleteBoard(Long boardId) {
 		boardRepository.deleteById(boardId);
+	}
+
+	@Transactional
+	public Long updateBoard(Long boardId, UpdateBoardReqDto reqDto) {
+		Board findBoard = boardRepository.findById(boardId).orElseThrow(
+			() -> new IllegalArgumentException("게시글이 존재하지 않습니다.")
+		);
+
+		findBoard.updateBoard(reqDto.title(), reqDto.content());
+
+		return findBoard.getId();
 	}
 }
