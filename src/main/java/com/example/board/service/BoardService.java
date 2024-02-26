@@ -1,10 +1,14 @@
 package com.example.board.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.board.domain.Board;
 import com.example.board.dto.CreateBoardReqDto;
+import com.example.board.dto.FindAllBoardReqDto;
 import com.example.board.dto.UpdateBoardReqDto;
 import com.example.board.repository.BoardRepository;
 
@@ -37,5 +41,13 @@ public class BoardService {
 		findBoard.updateBoard(reqDto.title(), reqDto.content());
 
 		return findBoard.getId();
+	}
+
+	@Transactional(readOnly = true)
+	public List<FindAllBoardReqDto> findAllBoard() {
+		List<Board> boardList = boardRepository.findAll();
+		return boardList.stream()
+			.map(b -> new FindAllBoardReqDto(b.getId(), b.getTitle(), b.getContent()))
+			.collect(Collectors.toList());
 	}
 }
