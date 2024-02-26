@@ -5,8 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.board.domain.Comment;
 
-import jakarta.persistence.Id;
-
 @Repository
-public interface CommentRepository extends JpaRepository<Comment, Id> {
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 }

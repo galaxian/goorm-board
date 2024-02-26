@@ -34,4 +34,8 @@ public class Comment {
 		this.content = content;
 		this.board = board;
 	}
+
+	public void updateComment(String content) {
+		this.content = content;
+	}
 }
