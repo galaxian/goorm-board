@@ -29,4 +29,9 @@ public class Board extends BaseEntity {
 
 	@OneToMany(mappedBy = "board")
 	private List<Comment> comments;
+
+	public Board(String title, String content) {
+		this.title = title;
+		this.content = content;
+	}
 }
