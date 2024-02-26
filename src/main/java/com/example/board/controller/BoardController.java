@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.board.dto.CreateBoardReqDto;
-import com.example.board.dto.FindAllBoardReqDto;
+import com.example.board.dto.FindAllBoardResDto;
+import com.example.board.dto.FindBoardResDto;
 import com.example.board.dto.UpdateBoardReqDto;
 import com.example.board.service.BoardService;
 import com.example.board.util.ApiResponse;
@@ -43,8 +44,14 @@ public class BoardController {
 	}
 
 	@GetMapping("/api/boards")
-	public ApiResponse<List<FindAllBoardReqDto>> findAllBoard() {
-		List<FindAllBoardReqDto> data = boardService.findAllBoard();
+	public ApiResponse<List<FindAllBoardResDto>> findAllBoard() {
+		List<FindAllBoardResDto> data = boardService.findAllBoard();
+		return ApiResponse.successResponse(data);
+	}
+
+	@GetMapping("/api/boards/{boardId}")
+	public ApiResponse<FindBoardResDto> findBoard(@PathVariable("boardId") Long boardId) {
+		FindBoardResDto data = boardService.findBoard(boardId);
 		return ApiResponse.successResponse(data);
 	}
 }

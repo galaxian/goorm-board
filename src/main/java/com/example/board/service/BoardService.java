@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.board.domain.Board;
+import com.example.board.dto.CommentResDto;
 import com.example.board.dto.CreateBoardReqDto;
-import com.example.board.dto.FindAllBoardReqDto;
+import com.example.board.dto.FindAllBoardResDto;
+import com.example.board.dto.FindBoardResDto;
 import com.example.board.dto.UpdateBoardReqDto;
 import com.example.board.repository.BoardRepository;
 
@@ -44,10 +46,23 @@ public class BoardService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<FindAllBoardReqDto> findAllBoard() {
+	public List<FindAllBoardResDto> findAllBoard() {
 		List<Board> boardList = boardRepository.findAll();
 		return boardList.stream()
-			.map(b -> new FindAllBoardReqDto(b.getId(), b.getTitle()))
+			.map(b -> new FindAllBoardResDto(b.getId(), b.getTitle()))
 			.collect(Collectors.toList());
+	}
+
+	@Transactional(readOnly = true)
+	public FindBoardResDto findBoard(Long boardId) {
+		Board findBoard = boardRepository.findById(boardId).orElseThrow(
+			() -> new IllegalArgumentException("게시글이 존재하지 않습니다.")
+		);
+
+		return new FindBoardResDto(findBoard.getId(), findBoard.getTitle(), findBoard.getContent(),
+			findBoard.getComments()
+				.stream()
+				.map(c -> new CommentResDto(c.getId(), c.getContent()))
+				.collect(Collectors.toList()));
 	}
 }
