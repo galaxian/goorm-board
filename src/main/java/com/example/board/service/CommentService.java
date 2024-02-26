@@ -43,4 +43,13 @@ public class CommentService {
 
 		return findComment.getId();
 	}
+
+	@Transactional
+	public void deleteComment(Long boardId, Long commentId) {
+		boardRepository.findById(boardId).orElseThrow(
+			() -> new IllegalArgumentException("게시글이 존재하지 않습니다.")
+		);
+
+		commentRepository.deleteById(commentId);
+	}
 }

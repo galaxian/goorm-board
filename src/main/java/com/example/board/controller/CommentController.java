@@ -1,5 +1,6 @@
 package com.example.board.controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,5 +33,12 @@ public class CommentController {
 		UpdateCommentReqDto reqDto) {
 		Long data = commentService.updateComment(boardId, commentId, reqDto);
 		return ApiResponse.successResponse(data);
+	}
+
+	@DeleteMapping("api/comments/{boardId}/{commentId}")
+	public ApiResponse<Void> deleteComment(@PathVariable("boardId") Long boardId,
+		@PathVariable("commentId") Long commentId) {
+		commentService.deleteComment(boardId, commentId);
+		return ApiResponse.successDeleteResponse();
 	}
 }
