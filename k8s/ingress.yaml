@@ -10,7 +10,7 @@ metadata:
   namespace: default
 spec:
   rules:
-    - host: https://k35d555d0de88a.user-app.krampoline.com
+    - host: *
       http:
         paths:
           - path: /
