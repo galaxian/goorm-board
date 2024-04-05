@@ -10,13 +10,10 @@ metadata:
   namespace: default
 spec:
   rules:
-    - host: "*.krampoline.com"
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: backend-service
-                port:
-                  number: 8080
+    - http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            serviceName: backend-service
+            servicePort: 3000
