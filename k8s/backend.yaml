@@ -15,6 +15,7 @@ spec:
       containers:
         - name: backend
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_3b80866ea337
+          imagePullPolicy: Always
           resources:
             requests:
               memory: 1Gi
