@@ -16,4 +16,4 @@ spec:
           pathType: Prefix
           backend:
             serviceName: backend-service
-            servicePort: 3000
+            servicePort: 8080
