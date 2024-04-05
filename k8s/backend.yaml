@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,34 +16,3 @@ spec:
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_3b80866ea337
           command: ["/bin/sh", "-ec", "while :; do echo 'Hello World'; sleep 5 ; done"]
           imagePullPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend
-spec:
-  selector:
-    app: backend
-  ports:
-    - port: 8080
-      targetPort: 8080
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/proxy-body-size: "64m"
-  labels:
-    app.kubernetes.io/managed-by: kargocd
-  name: backend
-  namespace: default
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              serviceName: backend
-              servicePort: 8080
