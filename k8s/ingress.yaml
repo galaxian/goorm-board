@@ -10,7 +10,7 @@ metadata:
   namespace: default
 spec:
   rules:
-    - host: "*"
+    - host: "*.krampoline.com"
       http:
         paths:
           - path: /
