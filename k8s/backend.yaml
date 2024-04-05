@@ -15,7 +15,7 @@ spec:
       containers:
         - name: backend
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_3b80866ea337
-          command: [ 'sh', '-c', "echo 'xxx' && sleep 6000" ]
+          command: [ 'sh', '-c', "echo 'xxx' && sleep 5" ]
           imagePullPolicy: Always
 ---
 apiVersion: v1
