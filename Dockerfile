@@ -8,4 +8,4 @@ RUN mkdir -p /root/.gradle && echo -e "systemProp.http.proxyHost=krmp-proxy.9rum
 
 RUN chmod +x ./gradlew && ./gradlew clean build
 
-CMD ["java", "-jar", "/home/gradle/project/build/libs/board-0.0.1-SNAPSHOT-plain.jar"]
+CMD ["java", "-jar", "/home/gradle/project/build/libs/board-0.0.1-SNAPSHOT.jar"]
