@@ -14,7 +14,7 @@ spec:
       containers:
         - name: backend
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_6276f3da0e09
-          command: ["/bin/sh", "-ec", "while :; do echo 'Hello World'; sleep 5 ; done"]
+#          command: ["/bin/sh", "-ec", "while :; do echo 'Hello World'; sleep 5 ; done"]
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
