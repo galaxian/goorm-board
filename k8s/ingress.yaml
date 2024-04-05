@@ -11,8 +11,8 @@ metadata:
 spec:
   rules:
     - host: https://k35d555d0de88a.user-app.krampoline.com
-        http:
-          paths:
+      http:
+        paths:
           - path: /
             pathType: Prefix
             backend:
