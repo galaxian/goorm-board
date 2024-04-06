@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
-  label:
+  labels:
     app: backend
 spec:
   selector:
@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_6276f3da0e09
-#          command: ["/bin/sh", "-ec", "while :; do echo 'Hello World'; sleep 5 ; done"]
+          image: "krmp-d2hub-idock.9rum.cc/dev-test/repo_6276f3da0e09"
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

@@ -10,9 +10,9 @@ metadata:
 spec:
   rules:
     - http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            serviceName: backend-service
-            servicePort: 8080
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: backend-service
+              servicePort: 8080
