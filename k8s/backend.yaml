@@ -1,7 +1,10 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
+  label:
+    app: backend
 spec:
   selector:
     matchLabels:
@@ -18,3 +21,15 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: default
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 8080
+      targetPort: 8080
