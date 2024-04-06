@@ -1,12 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "64m"
+  name: backend-ingress
   labels:
     app.kubernetes.io/managed-by: kargocd
-  name: backend-ingress
-  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 64m
 spec:
   rules:
     - http:
@@ -14,5 +13,7 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: backend-service
-              servicePort: 8080
+              service:
+                name: backend-service
+                port:
+                  number: 8080
