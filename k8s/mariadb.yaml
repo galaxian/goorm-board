@@ -33,6 +33,7 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: data
+              subPath: mysql
             - mountPath: /docker-entrypoint-initdb.d
               name: init-db
           resources:
@@ -43,13 +44,8 @@ spec:
               memory: "1.5Gi"
               cpu: "1"
           readinessProbe:
-            exec:
-              command:
-                - "mysql"
-                - "-e"
-                - "SELECT 1"
-          ports:
-            - containerPort: 3306
+            tcpSocket:
+              port: 3306
       volumes:
         - name: init-db
           configMap:
@@ -70,8 +66,8 @@ metadata:
   name: mariadb
 spec:
   type: ClusterIP
+  clusterIP: None
   selector:
     app: mariadb
   ports:
-    - protocol: TCP
-      port: 3306
+    - port: 3306
