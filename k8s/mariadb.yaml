@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -37,8 +36,12 @@ spec:
             - mountPath: /docker-entrypoint-initdb.d
               name: init-db
           resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
             limits:
-              memory: 1Gi
+              memory: "1Gi"
+              cpu: "1"
           readinessProbe:
             exec:
               command:
