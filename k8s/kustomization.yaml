@@ -1,6 +1,9 @@
 namespace: default
 resources:
   - backend.yaml
-#  - service.yaml
+  - service.yaml
   - ingress.yaml
-#  - nginx.yaml
+configMapGenerator:
+  - name: init-db
+    files:
+      - configs/init.sql
