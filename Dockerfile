@@ -1,11 +1,11 @@
-FROM openjdk:17-jdk
+FROM adoptopenjdk:17-jdk-hotspot AS builder
 
 WORKDIR /home/gradle/project
-
 COPY . .
+RUN ./gradlew clean build --no-daemon
 
-RUN mkdir -p /root/.gradle && echo -e "systemProp.http.proxyHost=krmp-proxy.9rum.cc\nsystemProp.http.proxyPort=3128\nsystemProp.https.proxyHost=krmp-proxy.9rum.cc\nsystemProp.https.proxyPort=3128" > /root/.gradle/gradle.properties
+FROM adoptopenjdk:17-jre-hotspot
 
-RUN chmod +x ./gradlew && ./gradlew clean build
+COPY --from=builder /home/gradle/project/build/libs/board-0.0.1-SNAPSHOT.jar /app/board.jar
 
-CMD ["java", "-jar", "/home/gradle/project/build/libs/board-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/board.jar"]
