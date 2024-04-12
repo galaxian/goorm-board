@@ -2,7 +2,7 @@ FROM openjdk:17-jdk-alpine AS builder
 
 WORKDIR /home/gradle/project
 COPY . .
-RUN ./gradlew clean build --no-daemon
+RUN chmod +x ./gradlew && ./gradlew clean build --no-daemon
 
 FROM openjdk:17-jdk-alpine
 
