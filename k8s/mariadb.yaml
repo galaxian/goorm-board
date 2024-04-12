@@ -19,17 +19,15 @@ spec:
             - name: TZ
               value: "Asia/Seoul"
             - name: MYSQL_ROOT_PASSWORD
-              value: root
-#              valueFrom:
-#                secretKeyRef:
-#                  name: mariadb-secret
-#                  key: root-password
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: root-password
             - name: MYSQL_DATABASE
-              value: project
-#              valueFrom:
-#                secretKeyRef:
-#                  name: mariadb-secret
-#                  key: database-name
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: database-name
             - name: MYSQL_DISABLE_UPGRADE_BACKUP
               value: "true"
           volumeMounts:
