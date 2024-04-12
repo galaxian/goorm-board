@@ -38,6 +38,11 @@ spec:
                 secretKeyRef:
                   name: mariadb-secret
                   key: root-password
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: port
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

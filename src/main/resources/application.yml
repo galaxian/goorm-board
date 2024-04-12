@@ -6,7 +6,7 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:mariadb://${DB_HOST}/${DB_NAME}
+    url: jdbc:mariadb://${DB_HOST}:${DB_PORT}/${DB_NAME}
     driver-class-name: org.mariadb.jdbc.Driver
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
