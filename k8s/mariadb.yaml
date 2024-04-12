@@ -37,10 +37,10 @@ spec:
               name: init-db
           resources:
             requests:
-              memory: "512Mi"
+              memory: "1Gi"
               cpu: "500m"
             limits:
-              memory: "3Gi"
+              memory: "1.5Gi"
               cpu: "1"
           readinessProbe:
             exec:
