@@ -1,27 +1,26 @@
-create SCHEMA IF NOT EXISTS `boards` DEFAULT CHARACTER SET utf8mb4;
+CREATE DATABASE IF NOT EXISTS `project` DEFAULT CHARACTER SET utf8mb4;
 
-grant all on *.* to 'root'@'localhost' IDENTIFIED BY 'root' with grant OPTION;
-grant all on boards.* TO 'root'@'localhost';
-grant all on comments.* TO 'root'@'localhost';
+CREATE USER 'root'@'localhost' IDENTIFIED BY 'root';
+GRANT ALL ON `project`.* TO 'root'@'localhost' WITH GRANT OPTION;
+GRANT ALL ON `boards`.* TO 'root'@'localhost';
+GRANT ALL ON `comments`.* TO 'root'@'localhost';
 FLUSH PRIVILEGES;
 
-USE `boards`;
+USE `project`;
 
-drop table if exists `boards`;
-create table `boards` (
-        is_delete boolean not null,
+CREATE TABLE IF NOT EXISTS `boards` (
         board_id bigint auto_increment primary key,
+        is_delete boolean not null,
         created_at timestamp,
         last_modified_at timestamp,
         content varchar(255),
         title varchar(255)
-    ) engine=InnoDB DEFAULT CHARSET=utf8mb4;
+    );
 
-drop table if exists `comments`;
-create table `comments` (
+CREATE TABLE IF NOT EXISTS `comments` (
+        comment_id bigint auto_increment primary key,
         is_delete boolean not null,
         board_id bigint,
-        comment_id bigint auto_increment primary key,
         content varchar(255),
         foreign key (board_id) references `boards`(board_id)
-    ) engine=InnoDB DEFAULT CHARSET=utf8mb4;
+    );
