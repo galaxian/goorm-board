@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "comments")
 @SQLDelete(sql = "update comment set is_delete = true where comment_id = ?")
-@SQLRestriction("is_delete is false")
+@SQLRestriction("is_delete = false")
 @Entity
 public class Comment {
 

@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "boards")
 @SQLDelete(sql = "update board set is_delete = true where board_id = ?")
-@SQLRestriction("is_delete is false")
+@SQLRestriction("is_delete = false")
 @Entity
 public class Board extends BaseEntity {
 
