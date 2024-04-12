@@ -1,7 +1,6 @@
-CREATE DATABASE IF NOT EXISTS `project` DEFAULT CHARACTER SET utf8mb4;
+CREATE SCHEMA IF NOT EXISTS `project` DEFAULT CHARACTER SET utf8mb4;
 
-CREATE USER 'root'@'localhost' IDENTIFIED BY 'root';
-GRANT ALL ON `project`.* TO 'root'@'localhost' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION;
 GRANT ALL ON `boards`.* TO 'root'@'localhost';
 GRANT ALL ON `comments`.* TO 'root'@'localhost';
 FLUSH PRIVILEGES;
@@ -9,18 +8,18 @@ FLUSH PRIVILEGES;
 USE `project`;
 
 CREATE TABLE IF NOT EXISTS `boards` (
-        board_id bigint auto_increment primary key,
-        is_delete boolean not null,
-        created_at timestamp,
-        last_modified_at timestamp,
-        content varchar(255),
-        title varchar(255)
-    );
+    `is_delete` BOOLEAN NOT NULL,
+    `board_id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `last_modified_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `content` VARCHAR(255),
+    `title` VARCHAR(255)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `comments` (
-        comment_id bigint auto_increment primary key,
-        is_delete boolean not null,
-        board_id bigint,
-        content varchar(255),
-        foreign key (board_id) references `boards`(board_id)
-    );
+    `is_delete` BOOLEAN NOT NULL,
+    `board_id` BIGINT,
+    `comment_id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+    `content` VARCHAR(255),
+    FOREIGN KEY (`board_id`) REFERENCES `boards`(`board_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
