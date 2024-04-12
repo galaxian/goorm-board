@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Table(name = "boards")
+@Table(name = "board")
 @SQLDelete(sql = "update board set is_delete = true where board_id = ?")
 @SQLRestriction("is_delete is false")
 @Entity
