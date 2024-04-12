@@ -17,6 +17,27 @@ spec:
       containers:
         - name: backend
           image: "krmp-d2hub-idock.9rum.cc/dev-test/repo_6276f3da0e09"
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: host
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: database-name
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: root-password
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
