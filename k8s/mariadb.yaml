@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mariadb
-          image: mariadb:latest
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_b11eff344916:latest
           env:
             - name: TZ
               value: "Asia/Seoul"
