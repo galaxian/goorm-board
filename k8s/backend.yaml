@@ -43,6 +43,26 @@ spec:
                 secretKeyRef:
                   name: mariadb-secret
                   key: port
+            - name: HTTP_PROXY_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: HTTP_PROXY_HOST
+                  name: proxy
+            - name: HTTPS_PROXY_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: HTTPS_PROXY_HOST
+                  name: proxy
+            - name: HTTP_PROXY_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: HTTP_PROXY_PORT
+                  name: proxy
+            - name: HTTPS_PROXY_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: HTTPS_PROXY_PORT
+                  name: proxy
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

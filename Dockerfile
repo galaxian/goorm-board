@@ -3,7 +3,12 @@ FROM openjdk:17-jdk-alpine AS builder
 WORKDIR /home/gradle/project
 COPY . .
 
-RUN mkdir -p /root/.gradle && echo -e "systemProp.http.proxyHost=krmp-proxy.9rum.cc\nsystemProp.http.proxyPort=3128\nsystemProp.https.proxyHost=krmp-proxy.9rum.cc\nsystemProp.https.proxyPort=3128" > /root/.gradle/gradle.properties
+RUN mkdir -p /root/.gradle && \
+    echo "systemProp.http.proxyHost=$HTTP_PROXY_HOST" >> /root/.gradle/gradle.properties && \
+    echo "systemProp.http.proxyPort=$HTTP_PROXY_PORT" >> /root/.gradle/gradle.properties && \
+    echo "systemProp.https.proxyHost=$HTTPS_PROXY_HOST" >> /root/.gradle/gradle.properties && \
+    echo "systemProp.https.proxyPort=$HTTPS_PROXY_PORT" >> /root/.gradle/gradle.properties
+
 
 RUN chmod +x ./gradlew && ./gradlew clean build --no-daemon
 
